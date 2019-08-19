@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "product-service", url = "127.0.0.1:8000")
+@FeignClient(name = "product-service")
 public interface ProductClientRest {
     /**
      * list all products
