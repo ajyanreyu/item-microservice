@@ -2,5 +2,9 @@ spring:
   application:
     name: service-item
 
+logging:
+  level:
+    com:
+      shiro: debug
 server:
   port: 8002
