@@ -10,6 +10,6 @@ public class Product {
     private String name;
     private Double price;
     private Date createAt;
-
+    private Integer port;
 
 }

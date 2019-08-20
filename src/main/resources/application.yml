@@ -2,6 +2,11 @@ spring:
   application:
     name: service-item
 
+product-service:
+  ribbon:
+    listOfServers: 127.0.0.1:8000, 127.0.0.1:9000
+
+
 logging:
   level:
     com:
