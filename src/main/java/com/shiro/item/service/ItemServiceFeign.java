@@ -9,8 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
-@Primary
+@Service("serviceFeign")
 public class ItemServiceFeign  implements ItemServiceInterface{
 
     @Autowired
