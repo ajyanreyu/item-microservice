@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,10 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@RefreshScope
 @RestController
 public class ItemController {
 
     private static Logger log = LoggerFactory.getLogger(ItemController.class);
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     @Qualifier("serviceFeign")
@@ -45,6 +51,9 @@ public class ItemController {
         Map<String, String> json = new HashMap<>();
         json.put("text", text);
         json.put("port", port);
+        if (environment.getActiveProfiles().length > 0 && environment.getActiveProfiles()[0].contains("dev")) {
+            json.put("author.name", environment.getProperty("config.author.name"));
+        }
         return new ResponseEntity<Map<String, String>>(json, HttpStatus.OK);
     }
 
